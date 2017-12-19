@@ -6,7 +6,7 @@ package main
 
 import (
 	"net/http"
-	. "stub-server/setup"
+	. "github.com/aavzz/stub-server/setup"
 )
 
 func main() {
