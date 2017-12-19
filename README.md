@@ -12,7 +12,7 @@ Well, it does do something:
 
 The problem with Golang daemons is that the traditional way of daemonizing a process through fork() is not available in go.
 So another approach is used. A process starts, spawns a terminal-detached and setsid()ed child, then gets killed by the child.
-Sinchronozation between the two is carried out through an environment variable.
+Sinchronization between the two is carried out through an environment variable.
 
 There is a number of caveats here:
 
