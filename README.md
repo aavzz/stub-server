@@ -26,4 +26,4 @@ All of the above is dealt with in this example stub-server
 This software came into being after I studied a number of other daemonizing projects for the Go language.
 I did not invent anything new here, just wrapped up the ideas and sample code snippets.
 
-This software can be used as the basis of real servers in Go. Drop me a line if you find it useful.
+This software can be used as the basis of real golang servers. Drop me a line if you find it useful.
