@@ -8,8 +8,8 @@ package pidfile
 import (
 	"os"
 	"github.com/tabalt/pidfile"
-	. "github.com/aavzz/notifier/setup/syslog"
-	. "github.com/aavzz/notifier/setup/cmdlnopts"
+	. "github.com/aavzz/stub-server/setup/syslog"
+	. "github.com/aavzz/stub-server/setup/cmdlnopts"
 )
 
 var p *pidfile.PidFile
