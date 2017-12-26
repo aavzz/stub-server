@@ -6,11 +6,18 @@ package setup
  */
 
 import (
-	"fmt"
 	"os"
-	"os/signal"
-	"syscall"
+	"fmt"
 	"time"
+	"syscall"
+	"os/signal"
+	. "github.com/aavzz/notifier/setup/http"
+	. "github.com/aavzz/notifier/setup/daemon"
+	. "github.com/aavzz/notifier/setup/signal"
+	. "github.com/aavzz/notifier/setup/syslog"
+	. "github.com/aavzz/notifier/setup/pidfile"
+	. "github.com/aavzz/notifier/setup/cfgfile"
+	. "github.com/aavzz/notifier/setup/cmdlnopts"
 )
 
 func Setup() {
@@ -18,7 +25,7 @@ func Setup() {
 	//create child process
 	p, err := daemonize()
 	if err != nil {
-		fmt.Printf("Cannot daemonize: %s/n", err)
+		fmt.Println(err.Error())
 		os.Exit(1)
 	}
 
@@ -30,10 +37,10 @@ func Setup() {
 		//checks command line args, config file and double invocation
 		//writes errors to stdout
 		//and gets the coffin ready
-		parseCmdLine()
-		writePid()
-		readConfig()
-		initLogging()
+		ParseCmdLine()
+		InitLogging()
+		WritePid()
+		ReadConfig()
 
 		<-sigterm
 		os.Exit(0)
@@ -55,28 +62,13 @@ func Setup() {
 	//child's output goes to /dev/null
 	//we processed this in parent just to check for correctness
 	//real configuration happens here
-	parseCmdLine()
-	writePid()
-	readConfig()
-	initLogging()
+	ParseCmdLine()
+	InitLogging()
+	WritePid()
+	ReadConfig()
 
 	//final touch
-	signalHandling()
+	SignalHandling()
 
 }
 
-func ConfigPidFile() string {
-	return cmdLnOpts.pidfile
-}
-
-func ConfigCfgFile() string {
-	return cmdLnOpts.cfgfile
-}
-
-func ConfigSmtpServerAddress() string {
-	return cfgFile.smtp.address
-}
-
-func ConfigSmtpServerPort() uint16 {
-	return cfgFile.smtp.port
-}
