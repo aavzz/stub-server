@@ -9,7 +9,7 @@ import (
 	. "github.com/aavzz/stub-server/setup/cfgfile"
 )
 
-func signalHandling() {
+func SignalHandling() {
 
 	sighup := make(chan os.Signal, 1)
 	sigint := make(chan os.Signal, 1)
