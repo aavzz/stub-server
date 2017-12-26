@@ -4,4 +4,5 @@
 4. Pidfile deletion on exit
 5. Logging to syslog
 6. Configuration file processing
+7. Signal handling (-HUP, -INT, -TERM)
 
