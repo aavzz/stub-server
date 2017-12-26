@@ -70,7 +70,7 @@ func ReadConfig() {
 	cfgFile2ok=false
 	if err == nil {
 		if cfg.Section("section1").HasKey("field1") {
-			cfgFile2.sect1.field1 = cfg.Section("section1).Key("field1").String()
+			cfgFile2.sect1.field1 = cfg.Section("section1").Key("field1").String()
 		}
 		if cfg.Section("section1").HasKey("field2") {
 			cfgFile2.sect1.field2 = cfg.Section("section1").Key("field2").String()
