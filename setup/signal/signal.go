@@ -24,7 +24,8 @@ func signalHandling() {
 	go func() {
 		for {
 			<-sighup
-			SysLog.Info("SIGHUP received")
+			SysLog.Info("SIGHUP received, re-reading configuration file")
+			ReadConfig()
 		}
 	}()
 
