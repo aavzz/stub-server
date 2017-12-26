@@ -11,7 +11,6 @@ import (
 	"time"
 	"syscall"
 	"os/signal"
-	. "github.com/aavzz/stub-server/setup/http"
 	. "github.com/aavzz/stub-server/setup/daemon"
 	. "github.com/aavzz/stub-server/setup/signal"
 	. "github.com/aavzz/stub-server/setup/syslog"
