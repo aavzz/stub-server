@@ -79,9 +79,9 @@ func ReadConfig() {
 	cfgFile2ok=true
 }
 
-func CfgFileContent() (*CfgFile, error) {
+func CfgFileContent() (*ConfigurationFile, error) {
 	if cfgFile1ok == true {
-		c := &CfgFile{
+		c := &ConfigurationFile{
 			Sect1: Section1{
 				Field1: cfgFile1.sect1.field1,
 				Field2: cfgFile1.sect1.field2,
@@ -90,7 +90,7 @@ func CfgFileContent() (*CfgFile, error) {
 		return c, nil
 	}
 	if cfgFile2ok == true {
-		c := &CfgFile{
+		c := &ConfigurationFile{
 			Sect1: section1{
 				Field1: cfgFile2.sect1.field1,
 				Field2: cfgFile2.sect1.field1,
