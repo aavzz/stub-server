@@ -4,9 +4,9 @@ import (
 	"os"
 	"syscall"
 	"os/signal"
-	. "github.com/aavzz/notifier/setup/syslog"
-	. "github.com/aavzz/notifier/setup/pidfile"
-	. "github.com/aavzz/notifier/setup/cfgfile"
+	. "github.com/aavzz/stub-server/setup/syslog"
+	. "github.com/aavzz/stub-server/setup/pidfile"
+	. "github.com/aavzz/stub-server/setup/cfgfile"
 )
 
 func signalHandling() {
