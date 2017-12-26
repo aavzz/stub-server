@@ -6,9 +6,9 @@ package main
 
 import (
 	"net/http"
-	. "github.com/aavzz/notifier/setup"
-	. "github.com/aavzz/notifier/setup/syslog"
-	. "github.com/aavzz/notifier/setup/pidfile"
+	. "github.com/aavzz/stub-server/setup"
+	. "github.com/aavzz/stub-server/setup/syslog"
+	. "github.com/aavzz/stub-server/setup/pidfile"
 )
 
 func main() {
