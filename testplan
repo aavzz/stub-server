@@ -1,6 +1,7 @@
 1. Command line parameters correctness
-2. Pidfile creation
-3. Pidfile deletion on exit
-4. Logging to syslog
-5. Configuration file processing
+2. Multiple invocation
+3. Pidfile creation
+4. Pidfile deletion on exit
+5. Logging to syslog
+6. Configuration file processing
 
