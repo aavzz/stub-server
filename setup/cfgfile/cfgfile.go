@@ -9,9 +9,9 @@ import (
 	"os"
 	"errors"
 	"github.com/go-ini/ini"
-	. "github.com/aavzz/notifier/setup/syslog"
-	. "github.com/aavzz/notifier/setup/pidfile"
-	. "github.com/aavzz/notifier/setup/cmdlnopts"
+	. "github.com/aavzz/stub-server/setup/syslog"
+	. "github.com/aavzz/stub-server/setup/pidfile"
+	. "github.com/aavzz/stub-server/setup/cmdlnopts"
 )
 
 
