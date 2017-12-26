@@ -11,13 +11,13 @@ import (
 	"time"
 	"syscall"
 	"os/signal"
-	. "github.com/aavzz/notifier/setup/http"
-	. "github.com/aavzz/notifier/setup/daemon"
-	. "github.com/aavzz/notifier/setup/signal"
-	. "github.com/aavzz/notifier/setup/syslog"
-	. "github.com/aavzz/notifier/setup/pidfile"
-	. "github.com/aavzz/notifier/setup/cfgfile"
-	. "github.com/aavzz/notifier/setup/cmdlnopts"
+	. "github.com/aavzz/stub-server/setup/http"
+	. "github.com/aavzz/stub-server/setup/daemon"
+	. "github.com/aavzz/stub-server/setup/signal"
+	. "github.com/aavzz/stub-server/setup/syslog"
+	. "github.com/aavzz/stub-server/setup/pidfile"
+	. "github.com/aavzz/stub-server/setup/cfgfile"
+	. "github.com/aavzz/stub-server/setup/cmdlnopts"
 )
 
 func Setup() {
