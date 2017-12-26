@@ -22,7 +22,7 @@ import (
 func Setup() {
 
 	//create child process
-	p, err := daemonize()
+	p, err := Daemonize()
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
