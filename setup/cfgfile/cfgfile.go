@@ -91,7 +91,7 @@ func CfgFileContent() (*ConfigurationFile, error) {
 	}
 	if cfgFile2ok == true {
 		c := &ConfigurationFile{
-			Sect1: section1{
+			Sect1: Section1{
 				Field1: cfgFile2.sect1.field1,
 				Field2: cfgFile2.sect1.field1,
 			},
