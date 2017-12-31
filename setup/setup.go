@@ -6,13 +6,13 @@ package setup
 
 import (
 	"fmt"
+	. "github.com/aavzz/stub-server/serverlogic"
 	. "github.com/aavzz/stub-server/setup/cfgfile"
 	. "github.com/aavzz/stub-server/setup/cmdlnopts"
 	. "github.com/aavzz/stub-server/setup/daemon"
 	. "github.com/aavzz/stub-server/setup/pidfile"
 	. "github.com/aavzz/stub-server/setup/signal"
 	. "github.com/aavzz/stub-server/setup/syslog"
-	. "github.com/aavzz/stub-server/serverlogic"
 	"os"
 	"os/signal"
 	"syscall"
