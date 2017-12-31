@@ -12,7 +12,7 @@ import (
 	. "github.com/aavzz/stub-server/setup/pidfile"
 	. "github.com/aavzz/stub-server/setup/signal"
 	. "github.com/aavzz/stub-server/setup/syslog"
-	. "github.com/aavzz/stub-server/serverlogic/serverlogic"
+	. "github.com/aavzz/stub-server/serverlogic"
 	"os"
 	"os/signal"
 	"syscall"
