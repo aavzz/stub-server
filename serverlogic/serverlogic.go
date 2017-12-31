@@ -17,7 +17,7 @@ func ServerLogicInit() {
 	//just some event loop
 	//never mind that it does not do anything useful
 	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8081", nil)
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
