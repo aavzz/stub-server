@@ -1,24 +1,26 @@
+/*
+Package setup initializes the process to run in the
+background.
+*/
 package setup
 
-/*
- * this code runs both in parent and child
- * so beware of stdout availability (parent only)
- */
-
 import (
-	"os"
 	"fmt"
-	"time"
-	"syscall"
-	"os/signal"
-	. "github.com/aavzz/stub-server/setup/daemon"
-	. "github.com/aavzz/stub-server/setup/signal"
-	. "github.com/aavzz/stub-server/setup/syslog"
-	. "github.com/aavzz/stub-server/setup/pidfile"
 	. "github.com/aavzz/stub-server/setup/cfgfile"
 	. "github.com/aavzz/stub-server/setup/cmdlnopts"
+	. "github.com/aavzz/stub-server/setup/daemon"
+	. "github.com/aavzz/stub-server/setup/pidfile"
+	. "github.com/aavzz/stub-server/setup/signal"
+	. "github.com/aavzz/stub-server/setup/syslog"
+	. "github.com/aavzz/stub-server/serverlogic/serverlogic"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 )
 
+// Setup spawns child process, checks that everything is ok,
+// does the necessary initialization and stops the parent process.
 func Setup() {
 
 	//create child process
@@ -33,13 +35,10 @@ func Setup() {
 		sigterm := make(chan os.Signal, 1)
 		signal.Notify(sigterm, syscall.SIGTERM)
 
-		//checks command line args, config file and double invocation
+		//checks command line args and tries to init logging
 		//writes errors to stdout
-		//and gets the coffin ready
 		ParseCmdLine()
 		InitLogging()
-		WritePid()
-		ReadConfig()
 
 		<-sigterm
 		os.Exit(0)
@@ -48,7 +47,7 @@ func Setup() {
 	//parent never gets here
 
 	//give the parent time to install signal handler
-	//so we don't kill it prematurely
+	//so we don't kill it prematurely and get ugly message on stdout
 	time.Sleep(100 * time.Millisecond)
 
 	//say good bye to parent
@@ -59,15 +58,15 @@ func Setup() {
 	}
 
 	//child's output goes to /dev/null
-	//we processed this in parent just to check for correctness
+	//we call this in parent just to check for correctness
+	//and see error indications on stdout (logging is not initialized yet)
 	//real configuration happens here
 	ParseCmdLine()
 	InitLogging()
-	WritePid()
-	ReadConfig()
 
 	//final touch
+	WritePid()
+	ReadConfig()
 	SignalHandling()
-
+	ServerLogicInit()
 }
-
