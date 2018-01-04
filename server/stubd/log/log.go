@@ -1,0 +1,42 @@
+package log
+
+import (
+	"log"
+	"log/syslog"
+	"os"
+)
+
+var sysLog *syslog.Writer
+
+func InitSyslog() {
+	var err error
+	sysLog, err = syslog.New(syslog.LOG_INFO|syslog.LOG_DAEMON, "stubd")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+}
+
+func Info(s string) {
+	if sysLog != nil {
+		sysLog.Info(s)
+	} else {
+		log.Print(s)
+	}
+}
+
+func Error(s string) {
+	if sysLog != nil {
+		sysLog.Err(s)
+	} else {
+		log.Print(s)
+	}
+}
+
+func Fatal(s string) {
+	if sysLog != nil {
+		sysLog.Err(s)
+		os.Exit(1)
+	} else {
+		log.Fatal(s)
+	}
+}
