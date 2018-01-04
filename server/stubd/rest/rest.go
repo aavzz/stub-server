@@ -16,7 +16,7 @@ func InitHttp() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api1", api1.Handler).Methods("GET")
 
-	if err := http.ListenAndServe(viper.GetString("daemonize"), r); err != nil {
+	if err := http.ListenAndServe(viper.GetString("address"), r); err != nil {
 		log.Fatal(err.Error())
 	}
 }
