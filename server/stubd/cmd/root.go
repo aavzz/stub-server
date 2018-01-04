@@ -26,6 +26,7 @@ func stubdCommand(cmd *cobra.Command, args []string) {
 
 	//After daemonize() this part runs in child only
 
+	viper.SetConfigType("toml")
 	viper.SetConfigFile(viper.GetString("config"))
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatal(err.Error())
