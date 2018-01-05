@@ -1,7 +1,7 @@
 package pid
 
 import (
-	"github.com/aavzz/stub-server/server/stubd/log"
+	"github.com/aavzz/stub-server/server/common/log"
 	"github.com/tabalt/pidfile"
 )
 
