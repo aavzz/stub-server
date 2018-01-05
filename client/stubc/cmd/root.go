@@ -12,7 +12,6 @@ import (
 	"net/url"
 	"strings"
 	"io/ioutil"
-	"io"
 	"crypto/tls"
 )
 
@@ -65,9 +64,8 @@ func stubcCommand(cmd *cobra.Command, args []string) {
 		log.Fatal(err.Error())
 	}
 
-	dec := json.NewDecoder(strings.NewReader(body))
 	var v JResp
-	if err := dec.Decode(&v); err != io.EOF {
+	if err := json.Unmarshall(body, &v); err != nil {
 		log.Fatal(err)
 	}
 
