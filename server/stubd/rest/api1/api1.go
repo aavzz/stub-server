@@ -12,23 +12,23 @@ import (
 
 func Handler(w http.ResponseWriter, r *http.Request) {
 
-	type response struct {
-		error int
-		errorMsg string
-		section string
-		key string
-		value string
+	type JResponse struct {
+		Error int
+		ErrorMsg string
+		Section string
+		Key string
+		Value string
 	}
 
-	var resp response
+	var resp JResponse
 	ret := json.NewEncoder(w)
 
 	section := r.FormValue("section")
 	key := r.FormValue("key")
 
 	if section == "" {
-		resp.error = 1
-		resp.errorMsg = "Section parameter missing or empty"
+		resp.Error = 1
+		resp.ErrorMsg = "Section parameter missing or empty"
 		if err := ret.Encode(resp); err != nil {
 			log.Error(err.Error())
 		}
@@ -36,8 +36,8 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if key == "" {
-		resp.error = 2
-		resp.errorMsg = "Key parameter missing or empty"
+		resp.Error = 2
+		resp.ErrorMsg = "Key parameter missing or empty"
 		if err := ret.Encode(resp); err != nil {
 			log.Error(err.Error())
 		}
@@ -45,19 +45,19 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if viper.IsSet(section + "." + key) != true {
-		resp.error = 3
-		resp.errorMsg = "Key parameter not set"
-		resp.section = section
-		resp.key = key
+		resp.Error = 3
+		resp.ErrorMsg = "Key parameter not set"
+		resp.Section = section
+		resp.Key = key
 		if err := ret.Encode(resp); err != nil {
 			log.Error(err.Error())
 		}
 		return
 	} else {
-		resp.error = 0
-		resp.section = section
-		resp.key = key
-		resp.value = viper.GetString(section + "." + key)
+		resp.Error = 0
+		resp.Eection = section
+		resp.Key = key
+		resp.Value = viper.GetString(section + "." + key)
 		if err := ret.Encode(resp); err != nil {
 			log.Error(err.Error())
 		}
