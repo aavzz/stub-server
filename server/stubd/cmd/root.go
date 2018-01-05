@@ -8,6 +8,7 @@ import (
 	"github.com/aavzz/stub-server/server/stubd/rest"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"os"
 )
 
 var stubd = &cobra.Command{
