@@ -65,7 +65,7 @@ func stubcCommand(cmd *cobra.Command, args []string) {
 	}
 
 	var v JResp
-	if err := json.Unmarshall(body, &v); err != nil {
+	if err := json.Unmarshal(body, &v); err != nil {
 		log.Fatal(err)
 	}
 
