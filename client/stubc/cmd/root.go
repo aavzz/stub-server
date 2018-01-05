@@ -11,6 +11,9 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"io/ioutil"
+	"io"
+	"crypto/tls"
 )
 
 var stubd = &cobra.Command{
@@ -18,7 +21,7 @@ var stubd = &cobra.Command{
 	Short: "stubc is a minimal example of a rest web-app client",
 	Long:  `A minimal web-application client to use as a base for larger projects`,
 	Run:   stubcCommand,
-	Args:  ExactArgs(3),
+	Args:  cobra.ExactArgs(3),
 }
 
 func stubcCommand(cmd *cobra.Command, args []string) {
@@ -33,8 +36,8 @@ func stubcCommand(cmd *cobra.Command, args []string) {
 
 	//http client here
 	parameters := url.Values{
-		"section": viper.GetString("section"),
-		"key":     viper.Getstring("key"),
+		"section": {viper.GetString("section")},
+		"key":     {viper.GetString("key")},
 	}
 
 	url := viper.GetString("url")
