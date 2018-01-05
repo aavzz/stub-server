@@ -55,7 +55,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		return
 	} else {
 		resp.Error = 0
-		resp.Eection = section
+		resp.Section = section
 		resp.Key = key
 		resp.Value = viper.GetString(section + "." + key)
 		if err := ret.Encode(resp); err != nil {
