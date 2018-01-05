@@ -20,7 +20,6 @@ var stubd = &cobra.Command{
 	Short: "stubc is a minimal example of a rest web-app client",
 	Long:  `A minimal web-application client to use as a base for larger projects`,
 	Run:   stubcCommand,
-	Args:  cobra.ExactArgs(3),
 }
 
 func stubcCommand(cmd *cobra.Command, args []string) {
