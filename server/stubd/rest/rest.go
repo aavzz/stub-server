@@ -5,9 +5,9 @@ package rest
 
 import (
 	"context"
-	"github.com/aavzz/stub-server/server/common/log"
-	"github.com/aavzz/stub-server/server/common/pid"
-	"github.com/aavzz/stub-server/server/common/signal"
+	"github.com/aavzz/daemon/log"
+	"github.com/aavzz/daemon/pid"
+	"github.com/aavzz/daemon/signal"
 	"github.com/aavzz/stub-server/server/stubd/rest/api1"
 	"github.com/gorilla/mux"
 	"github.com/spf13/viper"
