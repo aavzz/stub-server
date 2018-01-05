@@ -18,7 +18,7 @@ import (
 // InitHttp sets up router and starts server
 func InitHttp() {
 	r := mux.NewRouter()
-	r.HandleFunc("/api1", api1.Handler).Methods("GET")
+	r.HandleFunc("/api1", api1.Handler).Methods("POST")
 
 	s := &http.Server{
 		Addr:     viper.GetString("address"),
