@@ -2,9 +2,9 @@ package cmd
 
 import (
 	"github.com/aavzz/stub-server/server/common"
-	"github.com/aavzz/stub-server/server/stubd/log"
-	"github.com/aavzz/stub-server/server/stubd/pid"
-	"github.com/aavzz/stub-server/server/stubd/signal"
+	"github.com/aavzz/stub-server/server/common/log"
+	"github.com/aavzz/stub-server/server/common/pid"
+	"github.com/aavzz/stub-server/server/common/signal"
 	"github.com/aavzz/stub-server/server/stubd/rest"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -20,7 +20,7 @@ var stubd = &cobra.Command{
 func stubdCommand(cmd *cobra.Command, args []string) {
 
 	if viper.GetBool("daemonize") == true {
-		log.InitSyslog()
+		log.InitSyslog("stubd")
 		common.Daemonize()
 	}
 
@@ -34,7 +34,19 @@ func stubdCommand(cmd *cobra.Command, args []string) {
 
 	if viper.GetBool("daemonize") == true {
 		pid.Write(viper.GetString("pidfile"))
-		signal.Handling()
+		signal.Ignore()
+		signal.Hup(func() {
+			log.Info("SIGHUP received, re-reading configuration file")
+			if err := viper.ReadInConfig(); err != nil {
+				pid.Remove()
+				log.Fatal(err.Error())
+			}
+		})
+		signal.Term(func() {
+			log.Info("SIGTERM received, exitting")
+			pid.Remove()
+			os.Exit(0)
+		})
 	}
 	rest.InitHttp()
 }
@@ -43,7 +55,7 @@ func Execute() {
 	stubd.Flags().StringP("config", "c", "/etc/stubd.conf", "configuration file (default: /etc/stubd.conf)")
 	stubd.Flags().StringP("pidfile", "p", "/var/run/stubd.pid", "PID file (default: /var/run/stubd.pid)")
 	stubd.Flags().StringP("address", "a", "127.0.0.1:8082", "address and port to bind to (default: 127.0.0.1:8082)")
-	stubd.Flags().BoolP("daemonize", "d", false, "Run as a daemon (default: no)")
+	stubd.Flags().BoolP("daemonize", "d", false, "run as a daemon (default: no)")
 	viper.BindPFlag("config", stubd.Flags().Lookup("config"))
 	viper.BindPFlag("pidfile", stubd.Flags().Lookup("pidfile"))
 	viper.BindPFlag("address", stubd.Flags().Lookup("address"))

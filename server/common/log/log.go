@@ -8,9 +8,17 @@ import (
 
 var sysLog *syslog.Writer
 
-func InitSyslog() {
+func Logger(tag string) *log.Logger {
+	l := log.New(os.Stdout, tag, syslog.LOG_INFO|syslog.LOG_DAEMON)
+	if sysLog != nil {
+		l.SetOutput(sysLog)
+	}
+	return l
+}
+
+func InitSyslog(tag string) {
 	var err error
-	sysLog, err = syslog.New(syslog.LOG_INFO|syslog.LOG_DAEMON, "stubd")
+	sysLog, err = syslog.New(syslog.LOG_INFO|syslog.LOG_DAEMON, tag)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -37,6 +45,7 @@ func Fatal(s string) {
 		sysLog.Err(s)
 		os.Exit(1)
 	} else {
-		log.Fatal(s)
+		log.Print(s) //log.Fatal produces ugly syslog message
+		os.Exit(1)
 	}
 }

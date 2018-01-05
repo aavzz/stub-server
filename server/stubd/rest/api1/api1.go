@@ -5,7 +5,7 @@ stubd usefull.
 package api1
 
 import (
-	"github.com/aavzz/stub-server/server/stubd/log"
+	"github.com/aavzz/stub-server/server/common/log"
 	"net/http"
 )
 

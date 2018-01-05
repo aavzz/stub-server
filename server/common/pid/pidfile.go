@@ -22,5 +22,7 @@ func Write(pid string) {
 }
 
 func Remove() {
-	p.Clear()
+	if p != nil {
+		p.Clear()
+	}
 }
