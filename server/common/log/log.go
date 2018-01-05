@@ -9,7 +9,7 @@ import (
 var sysLog *syslog.Writer
 
 func Logger(tag string) *log.Logger {
-	l := log.New(os.Stdout, tag, syslog.LOG_INFO|syslog.LOG_DAEMON)
+	l := log.New(os.Stdout, tag, log.LstdFlags)
 	if sysLog != nil {
 		l.SetOutput(sysLog)
 	}
