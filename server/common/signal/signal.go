@@ -6,7 +6,7 @@ import (
 	"syscall"
 )
 
-func Ignore(f func()) {
+func Ignore() {
 	signal.Ignore()
 }
 
