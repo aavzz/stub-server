@@ -22,7 +22,7 @@ func InitHttp() {
 	s := &http.Server{
 		Addr:     viper.GetString("address"),
 		Handler:  r,
-		ErrorLog: log.Logger(),
+		ErrorLog: log.Logger("stubd"),
 	}
 
 	if viper.GetBool("daemonize") == true {
