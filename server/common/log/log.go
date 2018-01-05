@@ -45,7 +45,6 @@ func Fatal(s string) {
 		sysLog.Err(s)
 		os.Exit(1)
 	} else {
-		log.Print(s) //log.Fatal produces ugly syslog message
-		os.Exit(1)
+		log.Fatal(s)
 	}
 }
