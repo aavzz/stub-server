@@ -14,11 +14,11 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	//Must be exportable
 	type JResponse struct {
-		Error int
+		Error    int
 		ErrorMsg string
-		Section string
-		Key string
-		Value string
+		Section  string
+		Key      string
+		Value    string
 	}
 
 	var resp JResponse
@@ -45,7 +45,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if viper.IsSet(section + "." + key) != true {
+	if viper.IsSet(section+"."+key) != true {
 		resp.Error = 3
 		resp.ErrorMsg = "Key parameter not set"
 		resp.Section = section
