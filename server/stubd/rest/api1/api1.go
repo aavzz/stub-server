@@ -6,6 +6,7 @@ package api1
 import (
 	"encoding/json"
 	"github.com/aavzz/daemon/log"
+	"github.com/spf13/viper"
 	"net/http"
 )
 
@@ -20,7 +21,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var resp response
-	ret := json.New(w)
+	ret := json.NewEncoder(w)
 
 	section := r.FormValue("section")
 	key := r.FormValue("key")
