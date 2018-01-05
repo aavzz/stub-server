@@ -1,9 +1,6 @@
 package signal
 
 import (
-	"github.com/aavzz/stub-server/server/common/log"
-	"github.com/aavzz/stub-server/server/common/pid"
-	"github.com/spf13/viper"
 	"os"
 	"os/signal"
 	"syscall"
