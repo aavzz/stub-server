@@ -1,10 +1,13 @@
+/*
+Package cmd implements stubd commands and flags
+*/
 package cmd
 
 import (
-	"github.com/aavzz/stub-server/server/common"
-	"github.com/aavzz/stub-server/server/common/log"
-	"github.com/aavzz/stub-server/server/common/pid"
-	"github.com/aavzz/stub-server/server/common/signal"
+	"github.com/aavzz/daemon"
+	"github.com/aavzz/daemon/log"
+	"github.com/aavzz/daemon/pid"
+	"github.com/aavzz/daemon/signal"
 	"github.com/aavzz/stub-server/server/stubd/rest"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -52,6 +55,7 @@ func stubdCommand(cmd *cobra.Command, args []string) {
 	rest.InitHttp()
 }
 
+// Execute starts stubd execution
 func Execute() {
 	stubd.Flags().StringP("config", "c", "/etc/stubd.conf", "configuration file (default: /etc/stubd.conf)")
 	stubd.Flags().StringP("pidfile", "p", "/var/run/stubd.pid", "PID file (default: /var/run/stubd.pid)")

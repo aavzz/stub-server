@@ -1,5 +1,5 @@
 /*
-Package rest implements REST interface of stubd.
+Package rest implements REST interface of stubd
 */
 package rest
 
@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-// InitHttp sets up router.
+// InitHttp sets up router and starts server
 func InitHttp() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api1", api1.Handler).Methods("GET")

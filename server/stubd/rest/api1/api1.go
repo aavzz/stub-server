@@ -1,11 +1,10 @@
 /*
-Package runtime/stubd implements everything than makes
-stubd usefull.
+Package api implements rest api version 1 for stubd
 */
 package api1
 
 import (
-	"github.com/aavzz/stub-server/server/common/log"
+	"github.com/aavzz/daemon/log"
 	"net/http"
 )
 
