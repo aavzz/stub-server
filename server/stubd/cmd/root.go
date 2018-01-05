@@ -25,7 +25,7 @@ func stubdCommand(cmd *cobra.Command, args []string) {
 
 	if viper.GetBool("daemonize") == true {
 		log.InitSyslog("stubd")
-		common.Daemonize()
+		daemon.Daemonize()
 	}
 
 	//After daemonize() this part runs in child only
