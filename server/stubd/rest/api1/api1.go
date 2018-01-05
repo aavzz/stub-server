@@ -12,6 +12,7 @@ import (
 
 func Handler(w http.ResponseWriter, r *http.Request) {
 
+	//Must be exportable
 	type JResponse struct {
 		Error int
 		ErrorMsg string
