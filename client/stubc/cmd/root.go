@@ -4,15 +4,15 @@ Package cmd implements stubc commands and flags
 package cmd
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
 	"strings"
-	"io/ioutil"
-	"crypto/tls"
 )
 
 var stubc = &cobra.Command{
