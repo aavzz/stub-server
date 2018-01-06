@@ -3,7 +3,7 @@
 #pkg add /path/to/stub-server::exec-server
 #pkg add /path/to/stub-server::exec-client
 
-2. Check failure when config file is not available
+2. Check stubd failure when config file is not available
 
 #/usr/sbin/stubd (open /etc/stubd.conf: no such file or directory)
 
@@ -14,6 +14,13 @@ Error: unknown flag: --invalid-flag
 Usage:
   stubd [flags]
 ...
+
+#/usr/sbin/stubc --invalid-flag
+Error: unknown flag: --invalid-flag
+Usage:
+  stubc [flags]
+...
+
 
 4. Check non-daemon execution
 
