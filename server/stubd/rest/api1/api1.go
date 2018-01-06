@@ -10,6 +10,7 @@ import (
 	"net/http"
 )
 
+// Handler processes http requests and writes responses
 func Handler(w http.ResponseWriter, r *http.Request) {
 
 	//Must be exportable
