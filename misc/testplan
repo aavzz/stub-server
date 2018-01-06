@@ -1,6 +1,4 @@
-stubd
-
-1. Install stubd
+1. Install stubd and stubc
 
 #pkg add /path/to/stub-server::exec-server
 
@@ -25,7 +23,7 @@ Usage:
 #/usr/bin/stubc -u http://127.0.0.1:8082/api1 -s section1 -k field1 (value1)
 ^C
 
-5. Check daemon execution 
+5. Check daemon and client 
 
 #/usr/sbin/stubd -c /etc-dist/stubd.conf -d
 #/usr/sbin/stubd -c /etc-dist/stubd.conf -d (syslog: Another process is already running)
@@ -33,22 +31,9 @@ Usage:
 #netstat -an (127.0.0.1:8082)
 #/usr/bin/stubc -u http://127.0.0.1:8082/api1 -s section1 -k f1 (Key parameter not set)
 #/usr/bin/stubc -u http://127.0.0.1:8082/api1 -s section1 -k field1 (value1)
-edit /etc-dist/stubd.conf
-killall -HUP stubd (systat: SIGHUP received, re-reading configuration file)
+edit /etc-dist/stubd.conf (value1 -> value1111)
+#killall -HUP stubd (syslog: SIGHUP received, re-reading configuration file)
 #/usr/bin/stubc -u http://127.0.0.1:8082/api1 -s section1 -k field1 (value1111)
-
-
-
-
-
-stubc
-
-
-1. Command line parameters correctness
-2. Multiple invocation
-3. Pidfile creation
-4. Pidfile deletion on exit
-5. Logging to syslog
-6. Configuration file processing
-7. Signal handling (-HUP, -INT, -TERM)
-
+#killall -QUIT stubd (syslog: SIGQUIT received, exitting gracefully)
+#/usr/sbin/stubd -c /etc-dist/stubd.conf -d
+#killall -TERM stubd (syslog: SIGTERM received, exitting)
