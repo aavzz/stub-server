@@ -76,7 +76,7 @@ func stubcCommand(cmd *cobra.Command, args []string) {
 
 }
 
-// Execute starts stubd execution
+// Execute starts stubc execution
 func Execute() {
 	stubd.Flags().StringP("section", "s", "", "configuration file section")
 	stubd.Flags().StringP("key", "k", "", "configuration file key")
