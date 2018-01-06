@@ -15,7 +15,7 @@ import (
 	"crypto/tls"
 )
 
-var stubd = &cobra.Command{
+var stubc = &cobra.Command{
 	Use:   "stubc",
 	Short: "stubc is a minimal example of a rest web-app client",
 	Long:  `A minimal web-application client to use as a base for larger projects`,
@@ -85,7 +85,7 @@ func Execute() {
 	viper.BindPFlag("key", stubd.Flags().Lookup("key"))
 	viper.BindPFlag("url", stubd.Flags().Lookup("url"))
 
-	if err := stubd.Execute(); err != nil {
+	if err := stubc.Execute(); err != nil {
 		log.Fatal(err.Error())
 	}
 }
