@@ -76,12 +76,12 @@ func stubcCommand(cmd *cobra.Command, args []string) {
 
 // Execute starts stubc execution
 func Execute() {
-	stubd.Flags().StringP("section", "s", "", "configuration file section")
-	stubd.Flags().StringP("key", "k", "", "configuration file key")
-	stubd.Flags().StringP("url", "u", "", "url to query")
-	viper.BindPFlag("section", stubd.Flags().Lookup("section"))
-	viper.BindPFlag("key", stubd.Flags().Lookup("key"))
-	viper.BindPFlag("url", stubd.Flags().Lookup("url"))
+	stubc.Flags().StringP("section", "s", "", "configuration file section")
+	stubc.Flags().StringP("key", "k", "", "configuration file key")
+	stubc.Flags().StringP("url", "u", "", "url to query")
+	viper.BindPFlag("section", stubc.Flags().Lookup("section"))
+	viper.BindPFlag("key", stubc.Flags().Lookup("key"))
+	viper.BindPFlag("url", stubc.Flags().Lookup("url"))
 
 	if err := stubc.Execute(); err != nil {
 		log.Fatal(err.Error())
