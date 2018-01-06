@@ -1,6 +1,7 @@
 1. Install stubd and stubc
 
 #pkg add /path/to/stub-server::exec-server
+#pkg add /path/to/stub-server::exec-client
 
 2. Check failure when config file is not available
 
