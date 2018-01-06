@@ -32,7 +32,6 @@ func stubcCommand(cmd *cobra.Command, args []string) {
 		Value    string
 	}
 
-	//http client here
 	parameters := url.Values{
 		"section": {viper.GetString("section")},
 		"key":     {viper.GetString("key")},
@@ -73,7 +72,6 @@ func stubcCommand(cmd *cobra.Command, args []string) {
 	} else {
 		log.Print(v.ErrorMsg)
 	}
-
 }
 
 // Execute starts stubc execution
