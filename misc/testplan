@@ -1,3 +1,27 @@
+stubd
+
+1. Install stubd
+
+`#pkg add /path/to/stub-server::exec-server`
+
+2. Check failure when config file is not available
+
+`#/usr/sbin/stubd`
+`open /etc/stubd.conf: no such file or directory`
+
+3. Check invalid flag failure
+
+`#/usr/sbin/stubd -c /etc-dist/stubd.conf --invalid-flag`
+`
+Error: unknown flag: --invalid-flag
+Usage:
+  stubd [flags]
+`
+
+
+stubc
+
+
 1. Command line parameters correctness
 2. Multiple invocation
 3. Pidfile creation
