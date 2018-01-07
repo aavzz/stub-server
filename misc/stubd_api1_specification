@@ -1,0 +1,31 @@
+
+All requests are submitted via POST to URL /api1
+All responses are sent as json objects
+
+1. Export config file contents 
+
+   request
+
+      section=<section name>
+      key=<key name>
+
+      section=section1&key=key1
+
+   response
+
+       Success
+
+          Error    0
+          ErrorMsg ""
+          Section  "section name"
+          Key      "key name"
+          Value    "key value"
+ 
+       Failure
+
+          Error = N
+          ErrorMsg = "Error message"
+          Section  "section name"
+          Key      "key name"
+          Value    "key value"
+
