@@ -4,7 +4,7 @@ Package cmd implements stubd commands and flags
 package cmd
 
 import (
-	"github.com/aavzz/daemon"
+	"github.com/aavzz/daemon/fork"
 	"github.com/aavzz/daemon/log"
 	"github.com/aavzz/daemon/pid"
 	"github.com/aavzz/daemon/signal"
@@ -25,7 +25,7 @@ func stubdCommand(cmd *cobra.Command, args []string) {
 
 	if viper.GetBool("daemonize") == true {
 		log.InitSyslog("stubd")
-		daemon.Daemonize()
+		fork.Daemonize()
 	}
 
 	//After daemonize() this part runs in child only
