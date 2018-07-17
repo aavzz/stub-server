@@ -8,6 +8,7 @@ import (
 	"github.com/aavzz/daemon/pid"
 	"github.com/aavzz/daemon/signal"
 	"github.com/aavzz/stub-server/server/stubd/rest/api1"
+	"github.com/aavzz/stub-server/server/stubd/rest/api2"
 	"github.com/gorilla/mux"
 	"github.com/spf13/viper"
 	"net/http"
@@ -20,6 +21,7 @@ var Server *http.Server
 func InitHttp() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api1", api1.Handler).Methods("POST")
+	r.HandleFunc("/api2", api2.Handler).Methods("POST")
 
 	Server = &http.Server{
 		Addr:     viper.GetString("address"),
