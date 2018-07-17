@@ -8,45 +8,78 @@ import (
 	"github.com/aavzz/daemon/log"
 	"github.com/spf13/viper"
 	"net/http"
+	"io/ioutil"
+	"crypto/sha256"
+	"regexp"
+	"strconv"
 )
 
 // Handler processes http requests and writes responses
 func Handler(w http.ResponseWriter, r *http.Request) {
 
-	//Must be exportable
-	type JResponse struct {
-		Error    int
-		ErrorMsg string
-		Section  string
-		Key      string
-		Value    string
-	}
 
 	var resp JResponse
 	ret := json.NewEncoder(w)
 
-	section := r.FormValue("section")
-	key := r.FormValue("key")
-
-	if section == "" {
+	body, err := ioutil.ReadAll(r.Body)
+        if err != nil {
+		log.Error(err.Error())
+                return 
+        }
+        var v JRequest
+        if err := json.Unmarshal(body, &v); err != nil {
 		resp.Error = 1
-		resp.ErrorMsg = "Section parameter missing or empty"
+		resp.ErrorMsg = err.Error()
+		resp.Signature = 
 		if err := ret.Encode(resp); err != nil {
 			log.Error(err.Error())
 		}
 		return
 	}
 
-	if key == "" {
-		resp.Error = 2
-		resp.ErrorMsg = "Key parameter missing or empty"
+	//check signature
+
+	signature := JRequest.Signature
+	JRequest.Signature = viper.GetString("stubd.secret")
+	request, err := json.Marshall(JRequest)
+	if err != nil {
+		log.Error(err.Error())
+		return
+	}
+	if string(sha256.Sum256(request)) != signature {
+		resp.Error = 1
+		resp.ErrorMsg = "Signature check failed"
+		resp.Signature = 
 		if err := ret.Encode(resp); err != nil {
 			log.Error(err.Error())
 		}
 		return
+		
 	}
 
-	if viper.IsSet(section+"."+key) != true {
+	//signature ok, check user input
+
+	if m, _ := regexp.MatchString(`^[a-zA-Z_][a-zA-A0-9_-]*$`, JRequest.Section); !m {
+		resp.Error = 1
+		resp.ErrorMsg = "Wrong section name"
+		resp.Signature = 
+		if err := ret.Encode(resp); err != nil {
+			log.Error(err.Error())
+		}
+                return
+        }
+
+	if m, _ := regexp.MatchString(`^[a-zA-Z_][a-zA-A0-9_-]*$`, JRequest.Key); !m {
+		resp.Error = 1
+		resp.ErrorMsg = "Wrong key name"
+		resp.Signature = 
+		if err := ret.Encode(resp); err != nil {
+			log.Error(err.Error())
+		}
+                return
+        }
+
+	if viper.IsSet(JRequest.Section+"."+JRequest.Key) != true {
 		resp.Error = 3
 		resp.ErrorMsg = "Key parameter not set"
 		resp.Section = section
@@ -57,9 +90,13 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		return
 	} else {
 		resp.Error = 0
-		resp.Section = section
-		resp.Key = key
-		resp.Value = viper.GetString(section + "." + key)
+		resp.Section = JRequest.Section
+		resp.Key = JRequest.Key
+		if JRequest.Section == "stubd" &&  JRequest.Key == "secret" {
+			resp.Value = "** CENSORED **"
+		} else {
+			resp.Value = viper.GetString(JRequest.Section + "." + JRequest.Key)
+		}
 		if err := ret.Encode(resp); err != nil {
 			log.Error(err.Error())
 		}
