@@ -15,12 +15,14 @@ import (
 	"time"
 )
 
+var Server *http.Server
+
 // InitHttp sets up router and starts server
 func InitHttp() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api1", api1.Handler).Methods("POST")
 
-	s := &http.Server{
+	Server = &http.Server{
 		Addr:     viper.GetString("address"),
 		Handler:  r,
 		ErrorLog: log.Logger("stubd"),
@@ -30,12 +32,14 @@ func InitHttp() {
 		signal.Quit(func() {
 			ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 			log.Info("SIGQUIT received, exitting gracefully")
-			s.Shutdown(ctx)
+			Server.Shutdown(ctx)
 			pid.Remove()
 		})
 	}
 
-	if err := s.ListenAndServe(); err != nil {
-		log.Fatal(err.Error())
-	}
+	go func() {
+		if err := S.ListenAndServe(); err != http.ErrServerClosed {
+			log.Fatal(err.Error())
+		}
+	}()
 }
