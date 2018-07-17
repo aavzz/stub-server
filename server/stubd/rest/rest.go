@@ -28,7 +28,7 @@ func InitHttp() {
 	}
 
 	go func() {
-		if err := S.ListenAndServe(); err != http.ErrServerClosed {
+		if err := Server.ListenAndServeTLS(viper.GetString("certfile"), viper.GetString("keyfile")); err != http.ErrServerClosed {
 			log.Fatal(err.Error())
 		}
 	}()
