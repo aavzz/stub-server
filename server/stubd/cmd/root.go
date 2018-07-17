@@ -38,6 +38,8 @@ func stubdCommand(cmd *cobra.Command, args []string) {
 		log.Fatal(err.Error())
 	}
 
+	//Initialization
+
 	rest.InitHttp()
 
 	if viper.GetBool("daemonize") == true {
@@ -76,14 +78,10 @@ func stubdCommand(cmd *cobra.Command, args []string) {
 // Execute starts stubd execution
 func Execute() {
 	stubd.Flags().StringP("config", "c", "/etc/stubd/stubd.conf", "configuration file (default: /etc/stubd/stubd.conf)")
-	stubd.Flags().StringP("certfile", "C", "/etc/stubd/stubd.crt", "configuration file (default: /etc/stubd/stubd.crt)")
-	stubd.Flags().StringP("keyfile", "K", "/etc/stubd/stubd.key", "configuration file (default: /etc/stubd/stubd.key)")
 	stubd.Flags().StringP("pidfile", "p", "/var/run/stubd.pid", "PID file (default: /var/run/stubd.pid)")
 	stubd.Flags().StringP("address", "a", "127.0.0.1:443", "address and port to bind to (default: 127.0.0.1:443)")
 	stubd.Flags().BoolP("daemonize", "d", false, "run as a daemon (default: no)")
 	viper.BindPFlag("config", stubd.Flags().Lookup("config"))
-	viper.BindPFlag("certfile", stubd.Flags().Lookup("certfile"))
-	viper.BindPFlag("keyfile", stubd.Flags().Lookup("keyfile"))
 	viper.BindPFlag("pidfile", stubd.Flags().Lookup("pidfile"))
 	viper.BindPFlag("address", stubd.Flags().Lookup("address"))
 	viper.BindPFlag("daemonize", stubd.Flags().Lookup("daemonize"))

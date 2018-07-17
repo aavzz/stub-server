@@ -30,7 +30,7 @@ func InitHttp() {
 	}
 
 	go func() {
-		if err := Server.ListenAndServeTLS(viper.GetString("certfile"), viper.GetString("keyfile")); err != http.ErrServerClosed {
+		if err := Server.ListenAndServeTLS(viper.GetString("tls.certfile"), viper.GetString("tls.keyfile")); err != http.ErrServerClosed {
 			log.Fatal(err.Error())
 		}
 	}()
