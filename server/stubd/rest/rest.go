@@ -4,7 +4,6 @@ Package rest implements REST interface of stubd
 package rest
 
 import (
-	"context"
 	"github.com/aavzz/daemon/log"
 	"github.com/aavzz/daemon/pid"
 	"github.com/aavzz/daemon/signal"
@@ -26,15 +25,6 @@ func InitHttp() {
 		Addr:     viper.GetString("address"),
 		Handler:  r,
 		ErrorLog: log.Logger("stubd"),
-	}
-
-	if viper.GetBool("daemonize") == true {
-		signal.Quit(func() {
-			ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
-			log.Info("SIGQUIT received, exitting gracefully")
-			Server.Shutdown(ctx)
-			pid.Remove()
-		})
 	}
 
 	go func() {

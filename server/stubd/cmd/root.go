@@ -4,6 +4,7 @@ Package cmd implements stubd commands and flags
 package cmd
 
 import (
+	"context"
 	"github.com/aavzz/daemon/fork"
 	"github.com/aavzz/daemon/log"
 	"github.com/aavzz/daemon/pid"
@@ -12,6 +13,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"os"
+	"time"
 )
 
 var stubd = &cobra.Command{
@@ -36,6 +38,8 @@ func stubdCommand(cmd *cobra.Command, args []string) {
 		log.Fatal(err.Error())
 	}
 
+	rest.InitHttp()
+
 	if viper.GetBool("daemonize") == true {
 		pid.Write(viper.GetString("pidfile"))
 		signal.Ignore()
@@ -51,8 +55,22 @@ func stubdCommand(cmd *cobra.Command, args []string) {
 			pid.Remove()
 			os.Exit(0)
 		})
+                signal.Quit(func() {
+                        ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
+                        log.Info("SIGQUIT received, exitting gracefully")
+                        if err := rest.Server.Shutdown(ctx); err != nil {
+				log.Error(err.Error())
+			}
+                        pid.Remove()
+			os.Exit(0)
+                })
+	
+		//Heartbeat
+		for {
+			time.Sleep(300 * time.Second)
+			log.Info("still here")
+		}
 	}
-	rest.InitHttp()
 }
 
 // Execute starts stubd execution
